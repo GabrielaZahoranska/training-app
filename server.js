@@ -11,6 +11,10 @@ const workoutRoutes = require('./routes/workouts')
 
 const app = express()
 
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1)
+}
+
 mongoose.connect(process.env.MONGODB_URI)
 
 app.set('view engine', 'ejs')
@@ -25,6 +29,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      sameSite: 'lax',
+    },
   })
 )
 
