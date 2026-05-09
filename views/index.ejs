@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div>
+    <h1>Welcome</h1>
+    <% if (currentUser) { %>
+      <p>Welcome back, <%= currentUser.name %>. You can manage your workouts below.</p>
+      <div class="hero-actions">
+        <a class="btn" href="/workouts">My Workouts</a>
+        <a class="btn btn-secondary" href="/workouts/new">New Workout</a>
+      </div>
+    <% } else { %>
+      <p>Create, view, update, and delete your workout entries after signing in.</p>
+      <div class="hero-actions">
+        <a class="btn" href="/auth/sign-up">Sign Up</a>
+        <a class="btn btn-secondary" href="/auth/sign-in">Sign In</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

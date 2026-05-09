@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/">Training App</a>
+    <nav class="nav-links">
+      <% if (currentUser) { %>
+        <a href="/workouts">My Workouts</a>
+        <a href="/workouts/new">New Workout</a>
+        <a href="/auth/sign-out">Sign Out</a>
+      <% } %>
+    </nav>
+  </div>
+</header>
+<main class="container">

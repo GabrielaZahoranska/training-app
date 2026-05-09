@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="detail-card">
+  <h1><%= workout.title %></h1>
+  <p><strong>Date:</strong> <%= workout.workoutDate.toLocaleDateString() %></p>
+  <p><strong>Duration:</strong> <%= workout.duration %> minutes</p>
+  <p><strong>Focus:</strong> <%= workout.focus %></p>
+  <p><strong>Intensity:</strong> <%= workout.intensity %></p>
+  <p><strong>Notes:</strong> <%= workout.notes || 'No notes added.' %></p>
+  <p><strong>Created by:</strong> <%= workout.owner.name %></p>
+
+  <div class="action-row">
+    <a class="btn btn-secondary" href="/workouts">Back</a>
+    <% if (currentUser && currentUser._id === workout.owner._id.toString()) { %>
+      <a class="btn" href="/workouts/<%= workout._id %>/edit">Edit</a>
+      <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

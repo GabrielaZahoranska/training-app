@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-title-row">
+  <h1>My Workouts</h1>
+  <a class="btn" href="/workouts/new">Add Workout</a>
+</section>
+
+<% if (!workouts.length) { %>
+  <section class="empty-state">
+    <p>No workouts yet. Start by logging your first session.</p>
+  </section>
+<% } else { %>
+  <section class="workout-grid">
+    <% workouts.forEach((workout) => { %>
+      <article class="card workout-card">
+        <h2><%= workout.title %></h2>
+        <p><strong>Date:</strong> <%= workout.workoutDate.toLocaleDateString() %></p>
+        <p><strong>Focus:</strong> <%= workout.focus %></p>
+        <p><strong>Duration:</strong> <%= workout.duration %> minutes</p>
+        <p><strong>Intensity:</strong> <%= workout.intensity %></p>
+        <a class="btn btn-secondary" href="/workouts/<%= workout._id %>">View Details</a>
+      </article>
+    <% }) %>
+  </section>
+<% } %>
+
+<%- include('../partials/footer') %>
