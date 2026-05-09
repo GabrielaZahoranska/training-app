@@ -2,9 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const session = require('express-session')
-const { MongoStore } = require('connect-mongo')
 const methodOverride = require('method-override')
-const morgan = require('morgan')
 const mongoose = require('mongoose')
 const path = require('path')
 
@@ -18,8 +16,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
-app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -28,7 +25,6 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   })
 )
 
